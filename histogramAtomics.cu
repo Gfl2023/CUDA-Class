@@ -29,7 +29,7 @@ int *HistogramCPU;
 int *HistogramFromGPU;
 dim3 BlockSize; //This variable will hold the Dimensions of your block
 dim3 GridSize; //This variable will hold the Dimensions of your grid
-cudaEvent_t StartEvent, StopEvent;nvcc DeviceQuery.cu -o DeviceQuery
+cudaEvent_t StartEvent, StopEvent;
 
 //This will be the layout of the parallel space we will be using.
 void SetUpCudaDevices()
