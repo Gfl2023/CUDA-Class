@@ -5,7 +5,7 @@
 #include "./MyCuda.h"
 
 #define DATA_CHUNKS (1024*1024) 
-#define ENTIRE_DATA_SET (20*DATA_CHUNKS)
+#define ENTIRE_DATA_SET (24*DATA_CHUNKS)
 #define MAX_RANDOM_NUMBER 1000
 #define BLOCK_SIZE 256
 
@@ -157,7 +157,7 @@ int main()
 		cudaMemcpyAsync(A_GPU, A_CPU+i, DATA_CHUNKS*sizeof(float), cudaMemcpyHostToDevice,Stream0);
 		cudaMemcpyAsync(B_GPU, B_CPU+i, DATA_CHUNKS*sizeof(float), cudaMemcpyHostToDevice,Stream0);
 		trigAdditionGPU<<<DATA_CHUNKS/BLOCK_SIZE,BLOCK_SIZE,0,Stream0>>>(A_GPU, B_GPU,C_GPU,DATA_CHUNKS);
-		cudaMemcpyAsync(B_CPU+i,B_GPU,DATA_CHUNKS*sizeof(float),cudaMemcpyDeviceToHost,Stream0);
+		cudaMemcpyAsync(C_CPU+i,C_GPU,DATA_CHUNKS*sizeof(float),cudaMemcpyDeviceToHost,Stream0);
 		
 	}
 	

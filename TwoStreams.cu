@@ -5,7 +5,7 @@
 #include "./MyCuda.h"
 
 #define DATA_CHUNKS (1024*1024) 
-#define ENTIRE_DATA_SET (20*DATA_CHUNKS)
+#define ENTIRE_DATA_SET (24*DATA_CHUNKS)
 #define MAX_RANDOM_NUMBER 1000
 #define BLOCK_SIZE 256
 
@@ -169,10 +169,10 @@ int main()
 		trigAdditionGPU<<<GridSize,BlockSize,0,Stream0>>>(A0_GPU, B0_GPU,C0_GPU,DATA_CHUNKS);
 		cudaMemcpyAsync(C_CPU+i,C0_GPU,DATA_CHUNKS*sizeof(float),cudaMemcpyDeviceToHost,Stream0);
 		
-		cudaMemcpyAsync(A1_GPU, A_CPU+i, DATA_CHUNKS*sizeof(float), cudaMemcpyHostToDevice,Stream1);
-		cudaMemcpyAsync(B1_GPU, B_CPU+i, DATA_CHUNKS*sizeof(float), cudaMemcpyHostToDevice,Stream1);
+		cudaMemcpyAsync(A1_GPU, A_CPU+i+DATA_CHUNKS, DATA_CHUNKS*sizeof(float), cudaMemcpyHostToDevice,Stream1);
+		cudaMemcpyAsync(B1_GPU, B_CPU+i+DATA_CHUNKS, DATA_CHUNKS*sizeof(float), cudaMemcpyHostToDevice,Stream1);
 		trigAdditionGPU<<<GridSize,BlockSize,0,Stream1>>>(A1_GPU, B1_GPU,C1_GPU,DATA_CHUNKS);
-		cudaMemcpyAsync(C_CPU+i,C1_GPU,DATA_CHUNKS*sizeof(float),cudaMemcpyDeviceToHost,Stream1);
+		cudaMemcpyAsync(C_CPU+i+DATA_CHUNKS,C1_GPU,DATA_CHUNKS*sizeof(float),cudaMemcpyDeviceToHost,Stream1);
 		
 		
 	}
