@@ -98,15 +98,15 @@ void set_initail_conditions()
 			i++;
 		}	
 
-						i = 0;
-							while(i<N_O_S)
-								{
-								sphereCPU[i].vx = 2.0*MAX_VELOCITY*rand()/RAND_MAX - MAX_VELOCITY;
-								sphereCPU[i].vy = 2.0*MAX_VELOCITY*rand()/RAND_MAX - MAX_VELOCITY;
-								sphereCPU[i].vz = 2.0*MAX_VELOCITY*rand()/RAND_MAX - MAX_VELOCITY;
-								sphereCPU[i].mass = 1.0;
-								i++;
-								}
+			i = 0;
+			while(i<N_O_S)
+			{
+				sphereCPU[i].vx = 2.0*MAX_VELOCITY*rand()/RAND_MAX - MAX_VELOCITY;
+				sphereCPU[i].vy = 2.0*MAX_VELOCITY*rand()/RAND_MAX - MAX_VELOCITY;
+				sphereCPU[i].vz = 2.0*MAX_VELOCITY*rand()/RAND_MAX - MAX_VELOCITY;
+				sphereCPU[i].mass = 1.0;
+				i++;
+			}
 }
 void Drawwirebox()
 {		
