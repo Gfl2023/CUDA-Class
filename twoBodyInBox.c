@@ -29,7 +29,7 @@
 #define LENGTH_OF_BOX 6.0
 #define MAX_VELOCITY 5.0
 
-#define N_O_S 3
+#define N_O_S 10
 
 const float XMax = (LENGTH_OF_BOX/2.0);
 const float YMax = (LENGTH_OF_BOX/2.0);
@@ -212,9 +212,10 @@ void keep_in_box()
 void get_forces()
 {
 	float dx,dy,dz,r,r2,dvx,dvy,dvz,forceMag,inout;
+	
 	for(int i = 0; i < N_O_S-1 ; i++)
 	{
-		for(int j = 0; j < N_O_S; j++)
+		for(int j = i+1; j < N_O_S; j++)
 	{
 	
 
@@ -243,8 +244,10 @@ void get_forces()
 		{
 			forceMag +=  SPRING_REDUCTION*SPRING_STRENGTH*(r - DIAMETER);
 		}
+		
+		
 	}
-
+	
 	sphereCPU[i].gx = forceMag*dx/r;
 	sphereCPU[i].gy = forceMag*dy/r;
 	sphereCPU[i].gz = forceMag*dz/r;
